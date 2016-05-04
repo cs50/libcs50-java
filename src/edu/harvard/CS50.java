@@ -103,11 +103,13 @@ public class CS50
                 return Double.MAX_VALUE;
             }
 
-            // return a {@code double} if only a {@code double} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return a {@code double} if only a {@code double} (possibly with leading and/or
+            // trailing whitespace) was provided, checking for overflow
             try
             {
                 BigDecimal d = new BigDecimal(s.trim());
-                if (d.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) < 0 && d.compareTo(BigDecimal.valueOf(Double.MIN_VALUE)) >= 0)
+                if (d.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) < 0
+                    && d.compareTo(BigDecimal.valueOf(Double.MIN_VALUE)) >= 0)
                 {
                     return d.doubleValue();
                 }
@@ -143,11 +145,13 @@ public class CS50
                 return Float.MAX_VALUE;
             }
 
-            // return a {@code float} if only a {@code float} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return a {@code float} if only a {@code float} (possibly with leading and/or
+            // trailing whitespace) was provided, checking for overflow
             try
             {
                 BigDecimal f = new BigDecimal(s.trim());
-                if (f.compareTo(BigDecimal.valueOf(Float.MAX_VALUE)) < 0 && f.compareTo(BigDecimal.valueOf(Float.MIN_VALUE)) >= 0)
+                if (f.compareTo(BigDecimal.valueOf(Float.MAX_VALUE)) < 0
+                    && f.compareTo(BigDecimal.valueOf(Float.MIN_VALUE)) >= 0)
                 {
                     return f.floatValue();
                 }
@@ -183,11 +187,13 @@ public class CS50
                 return Integer.MAX_VALUE;
             }
 
-            // return an {@code int} if only an {@code int} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return an {@code int} if only an {@code int} (possibly with leading and/or
+            // trailing whitespace) was provided, checking for overflow
             try
             {
                 BigInteger i = new BigInteger(s.trim());
-                if (i.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) < 0 && i.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) >= 0)
+                if (i.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) < 0
+                    && i.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) >= 0)
                 {
                     return i.intValue();
                 }
