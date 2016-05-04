@@ -13,4 +13,13 @@
 
 ## Usage
 
+    // assuming `cs50.jar` is in `CLASSPATH`
     import edu.harvard.CS50;
+
+    ...
+
+    double d = CS50.getDouble();
+    float f = CS50.getFloat();
+    int i = CS50.getInt();
+    long l = CS50.getLong();
+    String s = CS50.getString();
