@@ -37,25 +37,27 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package edu.harvard;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Scanner;
 
-class CS50
+public class CS50
 {
-    public static void main(String [] args)
-    {
-        int n = GetInt();
-        System.out.println(n);
-        n = GetInt();
-        System.out.println(n);
-    }
+    /**
+     * Prevents instantiation of class (since all methods are static).
+     */
+    private CS50()
+    {}
 
     /**
      * Reads a line of text from standard input and returns the equivalent
-     * char; if text does not represent a char, user is prompted to retry.
+     * {@code char}; if text does not represent a {@code char}, user is prompted to retry.
      * Leading and trailing whitespace is ignored. If line can't be read,
-     * returns Character.MAX_VALUE.
+     * returns {@link java.lang.Character#MAX_VALUE}.
+     *
+     * @return char
      */
     public static char GetChar()
     {
