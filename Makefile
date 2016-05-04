@@ -1,9 +1,18 @@
-all: build docs
+all: build docs lib
 
 build:
-	find src -type f -name "*.java" -exec javac {} \;
+	rm -rf build
+	mkdir build
+	javac -d build src/edu/harvard/CS50.java 
 
 docs: build
 	rm -rf docs
 	javadoc -d docs -sourcepath src edu.harvard
 
+lib: build
+	rm -rf lib
+	mkdir lib
+	jar cvf lib/cs50.jar build/*
+
+clean:
+	rm -rf build docs lib
