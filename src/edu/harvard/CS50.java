@@ -2,7 +2,7 @@
  * CS50 Library for Java
  * https://github.com/cs50/java
  *
- * Port of CS50 Library for C.
+ * Port of CS50 Library to Java from C.
  *
  * Copyright (c) 2016,
  * David J. Malan <malan@harvard.edu>
@@ -53,19 +53,19 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns the equivalent
-     * {@code char}; if text does not represent a {@code char}, user is prompted to retry.
-     * Leading and trailing whitespace is ignored. If line can't be read,
-     * returns {@link java.lang.Character#MAX_VALUE}.
+     * {@code char}; if text does not represent a {@code char}, user is
+     * prompted to retry. Leading and trailing whitespace is ignored.
+     * If line can't be read, returns {@link Character#MAX_VALUE}.
      *
      * @return char
      */
-    public static char GetChar()
+    public static char getChar()
     {
         // try to get a char from user
         while (true)
         {
-            // get a line of text, returning Character.MAX_VALUE on error
-            String s = CS50.GetString();
+            // get a line of text, returning {@link Character#MAX_VALUE} on error
+            String s = CS50.getString();
             if (s == null)
             {
                 return Character.MAX_VALUE;
@@ -85,23 +85,25 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns the equivalent
-     * double as precisely as possible; if text does not represent a
-     * double, user is prompted to retry. Leading and trailing whitespace
-     * is ignored. If line can't be read, returns Double.MAX_VALUE.
+     * {@code double} as precisely as possible; if text does not represent a
+     * {@code double}, user is prompted to retry. Leading and trailing whitespace
+     * is ignored. If line can't be read, returns {@link Double#MAX_VALUE}.
+     *
+     * @return double
      */
-    public static double GetDouble()
+    public static double getDouble()
     {
         // try to get a double from user
         while (true)
         {
-            // get a line of text, returning Double.MAX_VALUE on error
-            String s = CS50.GetString();
+            // get a line of text, returning {@link Double#MAX_VALUE} on error
+            String s = CS50.getString();
             if (s == null)
             {
                 return Double.MAX_VALUE;
             }
 
-            // return a double if only a double (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return a {@code double} if only a {@code double} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
             try
             {
                 BigDecimal d = new BigDecimal(s.trim());
@@ -123,23 +125,25 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns the equivalent
-     * float as precisely as possible; if text does not represent a float,
-     * user is prompted to retry. Leading and trailing whitespace is ignored.
-     * If line can't be read, returns Float.MAX_VALUE.
+     * {@code float} as precisely as possible; if text does not represent a
+     * {@code float}, user is prompted to retry. Leading and trailing whitespace
+     * is ignored. If line can't be read, returns {@link Float#MAX_VALUE}.
+     *
+     * @return float
      */
-    public static float GetFloat()
+    public static float getFloat()
     {
         // try to get a float from user
         while (true)
         {
-            // get a line of text, returning Float.MAX_VALUE on error
-            String s = CS50.GetString();
+            // get a line of text, returning {@link Float#MAX_VALUE} on error
+            String s = CS50.getString();
             if (s == null)
             {
                 return Float.MAX_VALUE;
             }
 
-            // return a float if only a float (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return a {@code float} if only a {@code float} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
             try
             {
                 BigDecimal f = new BigDecimal(s.trim());
@@ -161,23 +165,25 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns it as an
-     * int in [-2^31, 2^31 - 1) if possible; if text does not represent
-     * such an int, user is prompted to retry. Leading and trailing whitespace
-     * is ignored. If line can't be read, returns Integer.MAX_VALUE.
+     * {@code int} in [-2<sup>31</sup>, 2<sup>31</sup> - 1) if possible; if text does not represent
+     * such an {@code int}, user is prompted to retry. Leading and trailing whitespace
+     * is ignored. If line can't be read, returns {@link Integer#MAX_VALUE}.
+     *
+     * @return int
      */
-    public static int GetInt()
+    public static int getInt()
     {
         // try to get an int from user
         while (true)
         {
-            // get a line of text, returning Integer.MAX_VALUE on error
-            String s = CS50.GetString();
+            // get a line of text, returning {@link Integer.MAX_VALUE} on error
+            String s = CS50.getString();
             if (s == null)
             {
                 return Integer.MAX_VALUE;
             }
 
-            // return an int if only an int (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return an {@code int} if only an {@code int} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
             try
             {
                 BigInteger i = new BigInteger(s.trim());
@@ -199,23 +205,25 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns an equivalent
-     * long in [-2^63, 2^63 - 1) if possible; if text does not represent
-     * such a long, user is prompted to retry. Leading and trailing whitespace
-     * is ignored. If line can't be read, returns Long.MAX_VALUE.
+     * {@code long} in [-2<sup>63</sup>, 2<sup>63</sup> - 1) if possible; if text does not represent
+     * such a {@code long}, user is prompted to retry. Leading and trailing whitespace
+     * is ignored. If line can't be read, returns {@link Long#MAX_VALUE}.
+     *
+     * @return long
      */
-    public static long GetLong()
+    public static long getLong()
     {
         // try to get a long from user
         while (true)
         {
-            // get a line of text, returning Long.MAX_VALUE on error
-            String s = CS50.GetString();
+            // get a line of text, returning {@link Long.MAX_VALUE} on error
+            String s = CS50.getString();
             if (s == null)
             {
                 return Long.MAX_VALUE;
             }
 
-            // return a long if only a long (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return a {@code long} if only a {@code long} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
             try
             {
                 BigInteger l = new BigInteger(s.trim());
@@ -237,12 +245,14 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns it as a
-     * String, sans trailing newline character. (Ergo, if user inputs
-     * only "\n", returns "" not null.) Returns null upon error or no
-     * input whatsoever (i.e., just EOF). Leading and trailing whitespace
-     * is not ignored.
+     * {@link String}, sans trailing newline character. (Ergo, if user inputs
+     * only {@code "\n"}, returns {@code ""} not {@code null}.) Returns {@code null}
+     * upon error or no input whatsoever (i.e., just {@code EOF}). Leading and trailing
+     * whitespace is not ignored.
+     *
+     * @return String
      */
-    public static String GetString()
+    public static String getString()
     {
         // try to get a String from user, returning null on error
         Scanner s = new Scanner(System.in);
