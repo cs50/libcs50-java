@@ -107,7 +107,7 @@ public class CS50
             // trailing whitespace) was provided, checking for overflow
             try
             {
-                BigDecimal d = new BigDecimal(s.trim());
+                BigDecimal d = new BigDecimal(s);
                 if (d.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) < 0
                     && d.compareTo(BigDecimal.valueOf(Double.MIN_VALUE)) >= 0)
                 {
@@ -149,7 +149,7 @@ public class CS50
             // trailing whitespace) was provided, checking for overflow
             try
             {
-                BigDecimal f = new BigDecimal(s.trim());
+                BigDecimal f = new BigDecimal(s);
                 if (f.compareTo(BigDecimal.valueOf(Float.MAX_VALUE)) < 0
                     && f.compareTo(BigDecimal.valueOf(Float.MIN_VALUE)) >= 0)
                 {
@@ -191,7 +191,7 @@ public class CS50
             // trailing whitespace) was provided, checking for overflow
             try
             {
-                BigInteger i = new BigInteger(s.trim());
+                BigInteger i = new BigInteger(s);
                 if (i.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) < 0
                     && i.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) >= 0)
                 {
@@ -232,7 +232,7 @@ public class CS50
             // return a {@code long} if only a {@code long} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
             try
             {
-                BigInteger l = new BigInteger(s.trim());
+                BigInteger l = new BigInteger(s);
                 if (l.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0 && l.compareTo(BigInteger.valueOf(Long.MIN_VALUE)) >= 0)
                 {
                     return l.longValue();
