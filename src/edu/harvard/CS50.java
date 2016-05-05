@@ -53,9 +53,8 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns the equivalent
-     * {@code char}; if text does not represent a {@code char}, user is
-     * prompted to retry. Leading and trailing whitespace is ignored.
-     * If line can't be read, returns {@link Character#MAX_VALUE}.
+     * {@code char}; if text does not represent a {@code char}, user is prompted
+     * to retry. If line can't be read, returns {@link Character#MAX_VALUE}.
      *
      * @return char
      */
@@ -71,7 +70,7 @@ public class CS50
                 return Character.MAX_VALUE;
             }
 
-            // return a char if only a char (possibly with leading and/or trailing whitespace) was provided
+            // return a char if only a char was provided
             if (s.length() == 1)
             {
                 return s.charAt(0);
@@ -103,8 +102,7 @@ public class CS50
                 return Double.MAX_VALUE;
             }
 
-            // return a {@code double} if only a {@code double} (possibly with leading and/or
-            // trailing whitespace) was provided, checking for overflow
+            // return a {@code double} if only a {@code double} was provided
             try
             {
                 BigDecimal d = new BigDecimal(s);
@@ -145,8 +143,7 @@ public class CS50
                 return Float.MAX_VALUE;
             }
 
-            // return a {@code float} if only a {@code float} (possibly with leading and/or
-            // trailing whitespace) was provided, checking for overflow
+            // return a {@code float} if only a {@code float} was provided
             try
             {
                 BigDecimal f = new BigDecimal(s);
@@ -188,8 +185,7 @@ public class CS50
                 return Integer.MAX_VALUE;
             }
 
-            // return an {@code int} if only an {@code int} (possibly with leading and/or
-            // trailing whitespace) was provided, checking for overflow
+            // return an {@code int} if only an {@code int} was provided
             try
             {
                 BigInteger i = new BigInteger(s);
@@ -231,8 +227,7 @@ public class CS50
                 return Long.MAX_VALUE;
             }
 
-            // return a {@code long} if only a {@code long} (possibly with leading
-            // and/or trailing whitespace) was provided, checking for overflow
+            // return a {@code long} if only a {@code long} was provided
             try
             {
                 BigInteger l = new BigInteger(s);
