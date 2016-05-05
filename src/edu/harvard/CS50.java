@@ -86,8 +86,8 @@ public class CS50
     /**
      * Reads a line of text from standard input and returns the equivalent
      * {@code double} as precisely as possible; if text does not represent a
-     * {@code double}, user is prompted to retry. Leading and trailing whitespace
-     * is ignored. If line can't be read, returns {@link Double#MAX_VALUE}.
+     * {@code double} or if value would cause underflow or overflow, user is
+     * prompted to retry. If line can't be read, returns {@link Double#MAX_VALUE}.
      *
      * @return double
      */
@@ -128,8 +128,8 @@ public class CS50
     /**
      * Reads a line of text from standard input and returns the equivalent
      * {@code float} as precisely as possible; if text does not represent a
-     * {@code float}, user is prompted to retry. Leading and trailing whitespace
-     * is ignored. If line can't be read, returns {@link Float#MAX_VALUE}.
+     * {@code float} or if value would cause underflow or overflow, user is
+     * prompted to retry. If line can't be read, returns {@link Float#MAX_VALUE}.
      *
      * @return float
      */
@@ -169,9 +169,10 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns it as an
-     * {@code int} in [-2<sup>31</sup>, 2<sup>31</sup> - 1) if possible; if text does not represent
-     * such an {@code int}, user is prompted to retry. Leading and trailing whitespace
-     * is ignored. If line can't be read, returns {@link Integer#MAX_VALUE}.
+     * {@code int} in [-2<sup>31</sup>, 2<sup>31</sup> - 1) if possible;
+     * if text does not represent such an {@code int} or if value would
+     * cause underflow or overflow, user is prompted to retry. If line
+     * can't be read, returns {@link Integer#MAX_VALUE}.
      *
      * @return int
      */
@@ -211,9 +212,10 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns an equivalent
-     * {@code long} in [-2<sup>63</sup>, 2<sup>63</sup> - 1) if possible; if text does not represent
-     * such a {@code long}, user is prompted to retry. Leading and trailing whitespace
-     * is ignored. If line can't be read, returns {@link Long#MAX_VALUE}.
+     * {@code long} in [-2<sup>63</sup>, 2<sup>63</sup> - 1) if possible;
+     * if text does not represent such a {@code long} or if value would
+     * cause underflow or overflow, user is prompted to retry. If line
+     * can't be read, returns {@link Long#MAX_VALUE}.
      *
      * @return long
      */
