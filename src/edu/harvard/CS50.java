@@ -231,11 +231,13 @@ public class CS50
                 return Long.MAX_VALUE;
             }
 
-            // return a {@code long} if only a {@code long} (possibly with leading and/or trailing whitespace) was provided, checking for overflow
+            // return a {@code long} if only a {@code long} (possibly with leading
+            // and/or trailing whitespace) was provided, checking for overflow
             try
             {
                 BigInteger l = new BigInteger(s);
-                if (l.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0 && l.compareTo(BigInteger.valueOf(Long.MIN_VALUE)) >= 0)
+                if (l.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0
+                    && l.compareTo(BigInteger.valueOf(Long.MIN_VALUE)) >= 0)
                 {
                     return l.longValue();
                 }
@@ -255,8 +257,7 @@ public class CS50
      * Reads a line of text from standard input and returns it as a
      * {@link String}, sans trailing newline character. (Ergo, if user inputs
      * only {@code "\n"}, returns {@code ""} not {@code null}.) Returns {@code null}
-     * upon error or no input whatsoever (i.e., just {@code EOF}). Leading and trailing
-     * whitespace is not ignored.
+     * upon error or no input whatsoever (i.e., just {@code EOF}).
      *
      * @return String
      */
