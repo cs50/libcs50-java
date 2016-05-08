@@ -1,6 +1,6 @@
 all: build docs lib
 
-build:
+build: src/edu/harvard/CS50.java
 	rm -rf build
 	mkdir build
 	javac -d build src/edu/harvard/CS50.java 
