@@ -12,7 +12,7 @@ docs: build
 lib: build
 	rm -rf lib
 	mkdir lib
-	jar cvf lib/cs50.jar build/*
+	jar cvf lib/cs50.jar -C build .
 
 clean:
 	rm -rf build docs lib
