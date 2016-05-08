@@ -106,7 +106,9 @@ public class CS50
             try
             {
                 BigDecimal d = new BigDecimal(s);
-                if (d.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) < 0
+                // disallow exponents and ensure value is finite
+                if (s.matches("[^Ee]+")
+                    && d.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) < 0
                     && d.compareTo(BigDecimal.valueOf(-Double.MAX_VALUE)) >= 0)
                 {
                     return d.doubleValue();
@@ -147,7 +149,9 @@ public class CS50
             try
             {
                 BigDecimal f = new BigDecimal(s);
-                if (f.compareTo(BigDecimal.valueOf(Float.MAX_VALUE)) < 0
+                // disallow exponents and ensure value is finite
+                if (s.matches("[^Ee]+")
+                    && f.compareTo(BigDecimal.valueOf(Float.MAX_VALUE)) < 0
                     && f.compareTo(BigDecimal.valueOf(-Float.MAX_VALUE)) >= 0)
                 {
                     return f.floatValue();
