@@ -221,16 +221,7 @@ public class CS50
             // return a {@code long} if only a {@code long} was provided
             try
             {
-                BigInteger l = new BigInteger(s);
-                if (l.compareTo(BigInteger.valueOf(Long.MAX_VALUE)) < 0
-                    && l.compareTo(BigInteger.valueOf(Long.MIN_VALUE)) >= 0)
-                {
-                    return l.longValue();
-                }
-                else
-                {
-                    throw new NumberFormatException();
-                }
+                return Long.parseLong(s);
             }
             catch (Exception e)
             {
