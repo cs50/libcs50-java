@@ -107,7 +107,7 @@ public class CS50
             {
                 BigDecimal d = new BigDecimal(s);
                 if (d.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) < 0
-                    && d.compareTo(BigDecimal.valueOf(Double.MIN_VALUE)) >= 0)
+                    && d.compareTo(BigDecimal.valueOf(-Double.MAX_VALUE)) >= 0)
                 {
                     return d.doubleValue();
                 }
@@ -148,7 +148,7 @@ public class CS50
             {
                 BigDecimal f = new BigDecimal(s);
                 if (f.compareTo(BigDecimal.valueOf(Float.MAX_VALUE)) < 0
-                    && f.compareTo(BigDecimal.valueOf(Float.MIN_VALUE)) >= 0)
+                    && f.compareTo(BigDecimal.valueOf(-Float.MAX_VALUE)) >= 0)
                 {
                     return f.floatValue();
                 }
@@ -188,16 +188,7 @@ public class CS50
             // return an {@code int} if only an {@code int} was provided
             try
             {
-                BigInteger i = new BigInteger(s);
-                if (i.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) < 0
-                    && i.compareTo(BigInteger.valueOf(Integer.MIN_VALUE)) >= 0)
-                {
-                    return i.intValue();
-                }
-                else
-                {
-                    throw new NumberFormatException();
-                }
+                return Integer.parseInt(s);
             }
             catch (Exception e)
             {
