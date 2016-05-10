@@ -1,4 +1,8 @@
-all: build docs lib
+pull: 
+	docker pull cs50/cli:ubuntu
+
+run: 
+	docker run -i --rm -v `pwd`/:/root -t cs50/cli:ubuntu
 
 build: src/edu/harvard/CS50.java
 	rm -rf build

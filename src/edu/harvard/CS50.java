@@ -106,10 +106,10 @@ public class CS50
             try
             {
                 // disallow hexadecimal, exponents, and suffixes
-                if (!s.matches(".*[XxEePpFfDd].*"))
+                if (s.matches("(\\+|-)?\\d+(\\.\\d*)?"))
                 {
                     double d = Double.parseDouble(s);
-                    if (!Double.isInfinite(d) && !Double.isNaN(d) && d < Double.MAX_VALUE)
+                    if (Double.isFinite(d) && d < Double.MAX_VALUE)
                     {
                         return d;
                     }
@@ -147,18 +147,15 @@ public class CS50
             try
             {
                 // disallow hexadecimal, exponents, and suffixes
-                if (!s.matches(".*[XxEePpFfDd].*"))
+                if (s.matches("(\\+|-)?\\d+(\\.\\d*)?"))
                 {
                     float f = Float.parseFloat(s);
-                    if (!Float.isInfinite(f) && !Float.isNaN(f) && f < Float.MAX_VALUE)
+                    if (Float.isFinite(f) && f < Float.MAX_VALUE)
                     {
                         return f;
                     }
                 }
-                else
-                {
-                    throw new NumberFormatException();
-                }
+                throw new NumberFormatException();
             }
             catch (Exception e)
             {
