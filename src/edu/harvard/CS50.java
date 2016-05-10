@@ -105,7 +105,6 @@ public class CS50
             // return a {@code double} if only a {@code double} was provided
             try
             {
-                // disallow hexadecimal, exponents, and suffixes
                 if (s.matches("(\\+|-)?\\d+(\\.\\d*)?"))
                 {
                     double d = Double.parseDouble(s);
@@ -146,7 +145,6 @@ public class CS50
             // return a {@code float} if only a {@code float} was provided
             try
             {
-                // disallow hexadecimal, exponents, and suffixes
                 if (s.matches("(\\+|-)?\\d+(\\.\\d*)?"))
                 {
                     float f = Float.parseFloat(s);
@@ -188,7 +186,11 @@ public class CS50
             // return an {@code int} if only an {@code int} was provided
             try
             {
-                return Integer.parseInt(s);
+                if (s.matches("(\\+|-)?\\d+"))
+                {
+                    return Integer.parseInt(s);
+                }
+                throw new NumberFormatException();
             }
             catch (Exception e)
             {
@@ -221,7 +223,11 @@ public class CS50
             // return a {@code long} if only a {@code long} was provided
             try
             {
-                return Long.parseLong(s);
+                if (s.matches("(\\+|-)?\\d+"))
+                {
+                    return Long.parseLong(s);
+                }
+                throw new NumberFormatException();
             }
             catch (Exception e)
             {
