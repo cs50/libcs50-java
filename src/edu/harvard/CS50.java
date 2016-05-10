@@ -105,16 +105,16 @@ public class CS50
             // return a {@code double} if only a {@code double} was provided
             try
             {
-                BigDecimal d = new BigDecimal(s);
-                if (d.compareTo(BigDecimal.valueOf(Double.MAX_VALUE)) < 0
-                    && d.compareTo(BigDecimal.valueOf(-Double.MAX_VALUE)) >= 0)
+                // disallow hexadecimal, exponents, and suffixes
+                if (!s.matches(".*[XxEePpFfDd].*"))
                 {
-                    return d.doubleValue();
+                    double d = Double.parseDouble(s);
+                    if (!Double.isInfinite(d) && !Double.isNaN(d) && d < Double.MAX_VALUE)
+                    {
+                        return d;
+                    }
                 }
-                else
-                {
-                    throw new NumberFormatException();
-                }
+                throw new NumberFormatException();
             }
             catch (Exception e)
             {
@@ -146,11 +146,14 @@ public class CS50
             // return a {@code float} if only a {@code float} was provided
             try
             {
-                BigDecimal f = new BigDecimal(s);
-                if (f.compareTo(BigDecimal.valueOf(Float.MAX_VALUE)) < 0
-                    && f.compareTo(BigDecimal.valueOf(-Float.MAX_VALUE)) >= 0)
+                // disallow hexadecimal, exponents, and suffixes
+                if (!s.matches(".*[XxEePpFfDd].*"))
                 {
-                    return f.floatValue();
+                    float f = Float.parseFloat(s);
+                    if (!Float.isInfinite(f) && !Float.isNaN(f) && f < Float.MAX_VALUE)
+                    {
+                        return f;
+                    }
                 }
                 else
                 {
