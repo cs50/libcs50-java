@@ -1,4 +1,6 @@
+.bash_history
 .DS_Store
+.viminfo
 *.class
 build/
 docs/
