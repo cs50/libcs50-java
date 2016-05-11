@@ -45,11 +45,43 @@ import java.util.Scanner;
 
 public class CS50
 {
+
+    private static void foo()
+    {
+	bar();
+    }
+
+    private static void bar()
+    {
+	baz();
+    }
+
+    private static void baz()
+    {
+	CS50.eprintln("hi");
+    }
+
+    public static void main(String[] args)
+    {
+	foo();
+    }
+
     /**
      * Prevents instantiation of class (since all methods are static).
      */
     private CS50()
     {}
+
+    /**
+     * TODO: decide if keeping
+     */
+    public static void eprintln(Object object)
+    {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        System.out.flush();
+        System.err.println(stackTrace[2].getFileName() + ":" + stackTrace[2].getLineNumber() + ": " + object);
+        System.err.flush();
+    }
 
     /**
      * Reads a line of text from standard input and returns the equivalent
