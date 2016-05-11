@@ -22,3 +22,7 @@ Requires [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
     int i = CS50.getInt();
     long l = CS50.getLong();
     String s = CS50.getString();
+
+## TODO
+
+* Decide if keeping `CS50.eprintf`.

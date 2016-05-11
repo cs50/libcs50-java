@@ -45,27 +45,6 @@ import java.util.Scanner;
 
 public class CS50
 {
-
-    private static void foo()
-    {
-	bar();
-    }
-
-    private static void bar()
-    {
-	baz();
-    }
-
-    private static void baz()
-    {
-	CS50.eprintln("hi");
-    }
-
-    public static void main(String[] args)
-    {
-	foo();
-    }
-
     /**
      * Prevents instantiation of class (since all methods are static).
      */
