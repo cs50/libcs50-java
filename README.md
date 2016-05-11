@@ -2,6 +2,8 @@
 
 ## Development
 
+Requires [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
+
     docker-compose run cli # runs CS50 CLI
     make all # builds all
     make build # builds src/edu/harvard/CS50.java as build/edu/harvard/CS50.class
