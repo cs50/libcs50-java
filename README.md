@@ -17,6 +17,7 @@ Requires [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 
     ...
 
+    char c = CS50.getChar();
     double d = CS50.getDouble();
     float f = CS50.getFloat();
     int i = CS50.getInt();
