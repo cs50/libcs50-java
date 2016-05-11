@@ -105,7 +105,7 @@ public class CS50
             // return a {@code double} if only a {@code double} was provided
             try
             {
-                if (s.matches("(\\+|-)?\\d+(\\.\\d*)?"))
+                if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
                 {
                     double d = Double.parseDouble(s);
                     if (Double.isFinite(d) && d < Double.MAX_VALUE)
@@ -145,7 +145,7 @@ public class CS50
             // return a {@code float} if only a {@code float} was provided
             try
             {
-                if (s.matches("(\\+|-)?\\d+(\\.\\d*)?"))
+                if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
                 {
                     float f = Float.parseFloat(s);
                     if (Float.isFinite(f) && f < Float.MAX_VALUE)
