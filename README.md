@@ -27,3 +27,4 @@ Requires [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 ## TODO
 
 * Decide if keeping `CS50.eprintf`.
+* Add tests.
