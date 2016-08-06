@@ -52,13 +52,16 @@ public class CS50
     {}
 
     /**
-     * TODO: decide if keeping
+     * Prints an error message, formatted like {@link java.io.PrintStream#printf},
+     * to standard error, prefixing it with program's name as well as the file and
+     * line number from which method was called.
      */
-    public static void eprintln(Object object)
+    public static void eprintf(String format, Object... args)
     {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         System.out.flush();
-        System.err.println(stackTrace[2].getFileName() + ":" + stackTrace[2].getLineNumber() + ": " + object);
+        System.err.print(stackTrace[2].getFileName() + ":" + stackTrace[2].getLineNumber() + ": ");
+        System.err.printf(format, args);
         System.err.flush();
     }
 
@@ -249,8 +252,9 @@ public class CS50
 
     /**
      * Reads a line of text from standard input and returns it as a
-     * {@link String}, sans trailing newline character. (Ergo, if user inputs
-     * only {@code "\n"}, returns {@code ""} not {@code null}.) Returns {@code null}
+     * {@link String}, sans trailing line ending. Supports CR ({@code \r}),
+     * LF ({@code \n}), and CRLF ({@code \r\n}) as line endings. If user inputs
+     * only {@code "\n"}, returns {@code ""}, not {@code null}. Returns {@code null}
      * upon error or no input whatsoever (i.e., just {@code EOF}).
      *
      * @return String
@@ -258,7 +262,7 @@ public class CS50
     public static String getString()
     {
         // try to get a String from user, returning null on error
-        Scanner s = new Scanner(System.in);
+        Scanner s = new Scanner(System.in).useDelimiter("\\n|\\r|\\r\\n");
         try
         {
             return s.nextLine();
