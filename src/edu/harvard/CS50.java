@@ -122,7 +122,7 @@ public class CS50
                 if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
                 {
                     double d = Double.parseDouble(s);
-                    if (Double.isFinite(d) && d < Double.MAX_VALUE)
+                    if (!Double.isInfinite(d) && d < Double.MAX_VALUE)
                     {
                         return d;
                     }
@@ -162,7 +162,7 @@ public class CS50
                 if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
                 {
                     float f = Float.parseFloat(s);
-                    if (Float.isFinite(f) && f < Float.MAX_VALUE)
+                    if (!Float.isInfinite(f) && f < Float.MAX_VALUE)
                     {
                         return f;
                     }
