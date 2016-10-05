@@ -4,7 +4,14 @@ NAME = lib50-java
 VERSION = 1.0.0
 
 BUILD_DIR = build
+DEB_DIR = $(BUILD_DIR)/deb
+DOCS_DIR = $(BUILD_DIR)/docs
 JAR_DIR = $(BUILD_DIR)/usr/java/packages/lib/ext
+PACMAN_DIR = $(BUILD_DIR)/pacman
+RPM_DIR = $(BUILD_DIR)/rpm
+
+.PHONY: all
+all: clean deb pacman rpm
 
 .PHONY: bash
 bash:
@@ -14,22 +21,22 @@ bash:
 build: clean Makefile src/edu/harvard/CS50.java
 	mkdir -p "$(JAR_DIR)"
 	javac -d "$(BUILD_DIR)" src/edu/harvard/CS50.java
-	jar cvf "$(JAR_DIR)/cs50.jar" -C build .
-	javadoc -d "$(BUILD_DIR)/docs" -sourcepath src edu.harvard
-	find build -type d -exec chmod 0755 {} +
-	find build -type f -exec chmod 0644 {} +
+	jar cvf "$(JAR_DIR)/cs50.jar" -C "$(BUILD_DIR)" .
+	find "$(BUILD_DIR)" -type d -exec chmod 0755 {} +
+	find "$(BUILD_DIR)" -type f -exec chmod 0644 {} +
 
 .PHONY: clean
 clean:
-	rm -rf build
+	rm -rf "$(BUILD_DIR)"
 
 .PHONY: deb
 deb: build
+	rm -rf "$(DEB_DIR)" && mkdir -p "$(DEB_DIR)"
 	fpm \
 	-C "$(BUILD_DIR)" \
 	-m "$(MAINTAINER)" \
 	-n "$(NAME)" \
-	-p "$(BUILD_DIR)" \
+	-p "$(DEB_DIR)" \
 	-s dir \
 	-t deb \
 	-v "$(VERSION)" \
@@ -38,15 +45,20 @@ deb: build
 	--description "$(DESCRIPTION)" \
 	usr
 
+.PHONY: docs
+docs:
+	rm -rf $(DOCS_DIR)
+	javadoc -d "$(DOCS_DIR)" -sourcepath src edu.harvard
+
 # TODO: add dependencies
 .PHONY: pacman
 pacman: build
-	rm -f "$(NAME)-$(VERSION)-*.pkg.tar.xz"
+	rm -f "$(PACMAN_DIR)" && mkdir -p "$(PACMAN_DIR)"
 	fpm \
 	-C "$(BUILD_DIR)" \
 	-m "$(MAINTAINER)" \
 	-n "$(NAME)" \
-	-p "$(BUILD_DIR)" \
+	-p "$(PACMAN_DIR)" \
 	-s dir \
 	-t pacman \
 	-v "$(VERSION)" \
@@ -56,12 +68,12 @@ pacman: build
 # TODO: add dependencies
 .PHONY: rpm
 rpm: build
-	rm -f "$(NAME)-$(VERSION)-*.rpm"
+	rm -rf "$(RPM_DIR)" && mkdir -p "$(RPM_DIR)"
 	fpm \
 	-C "$(BUILD_DIR)" \
 	-m "$(MAINTAINER)" \
 	-n "$(NAME)" \
-	-p "$(BUILD_DIR)" \
+	-p "$(RPM_DIR)" \
 	-s dir \
 	-t rpm \
 	-v "$(VERSION)" \
