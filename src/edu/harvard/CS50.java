@@ -39,12 +39,41 @@
 
 package edu.harvard;
 
+import java.io.BufferedOutputStream;
+import java.io.FileDescriptor;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Scanner;
 
 public class CS50
 {
+    // disable buffering on stderr and stdout
+    // only functional when class is initialized per http://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.1
+    static
+    {
+        // stderr
+        FileOutputStream fderr = new FileOutputStream(FileDescriptor.err);
+
+        // stdout
+        FileOutputStream fdout = new FileOutputStream(FileDescriptor.out);
+
+        // stderr buffer of size 1
+        BufferedOutputStream errBuf = new BufferedOutputStream(fderr, 1);
+
+        // stdout buffer of size 1
+        BufferedOutputStream outBuf = new BufferedOutputStream(fdout, 1);
+
+        // add more features and functionality to stderr and stdout
+        PrintStream errStream = new PrintStream(errBuf);
+        PrintStream outStream = new PrintStream(outBuf);
+
+        // update stderr and stdout
+        System.setErr(errStream);
+        System.setOut(outStream);
+    }
+
     /**
      * Prevents instantiation of class (since all methods are static).
      */
