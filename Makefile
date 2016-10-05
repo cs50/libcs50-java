@@ -31,7 +31,7 @@ clean:
 
 .PHONY: deb
 deb: build
-	rm -rf "$(DEB_DIR)" && mkdir -p "$(DEB_DIR)"
+	mkdir -p "$(DEB_DIR)"
 	fpm \
 	-C "$(BUILD_DIR)" \
 	-m "$(MAINTAINER)" \
@@ -53,7 +53,7 @@ docs:
 # TODO: add dependencies
 .PHONY: pacman
 pacman: build
-	rm -f "$(PACMAN_DIR)" && mkdir -p "$(PACMAN_DIR)"
+	mkdir -p "$(PACMAN_DIR)"
 	fpm \
 	-C "$(BUILD_DIR)" \
 	-m "$(MAINTAINER)" \
@@ -68,7 +68,7 @@ pacman: build
 # TODO: add dependencies
 .PHONY: rpm
 rpm: build
-	rm -rf "$(RPM_DIR)" && mkdir -p "$(RPM_DIR)"
+	mkdir -p "$(RPM_DIR)"
 	fpm \
 	-C "$(BUILD_DIR)" \
 	-m "$(MAINTAINER)" \
