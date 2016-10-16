@@ -6,6 +6,7 @@
  *
  * Copyright (c) 2016,
  * David J. Malan <malan@harvard.edu>
+ * Kareem Zidane <kzidane@cs50harvard.edu>
  * All rights reserved.
  *
  * BSD 3-Clause License
@@ -49,29 +50,12 @@ import java.util.Scanner;
 
 public class CS50
 {
-    // disable buffering on stderr and stdout
-    // only functional when class is initialized per http://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.1
+    // disable buffering on stderr and stdout, but only if class is initialized (i.e., actually used), per
+    // http://docs.oracle.com/javase/specs/jls/se7/html/jls-12.html#jls-12.4.1
     static
     {
-        // stderr
-        FileOutputStream fderr = new FileOutputStream(FileDescriptor.err);
-
-        // stdout
-        FileOutputStream fdout = new FileOutputStream(FileDescriptor.out);
-
-        // stderr buffer of size 1
-        BufferedOutputStream errBuf = new BufferedOutputStream(fderr, 1);
-
-        // stdout buffer of size 1
-        BufferedOutputStream outBuf = new BufferedOutputStream(fdout, 1);
-
-        // add more features and functionality to stderr and stdout
-        PrintStream errStream = new PrintStream(errBuf);
-        PrintStream outStream = new PrintStream(outBuf);
-
-        // update stderr and stdout
-        System.setErr(errStream);
-        System.setOut(outStream);
+        System.setErr(new PrintStream(new BufferedOutputStream(new FileOutputStream(FileDescriptor.err), 1)));
+        System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(FileDescriptor.out), 1)));
     }
 
     /**
@@ -88,10 +72,8 @@ public class CS50
     public static void eprintf(String format, Object... args)
     {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-        System.out.flush();
         System.err.print(stackTrace[2].getFileName() + ":" + stackTrace[2].getLineNumber() + ": ");
         System.err.printf(format, args);
-        System.err.flush();
     }
 
     /**
@@ -282,9 +264,9 @@ public class CS50
     /**
      * Reads a line of text from standard input and returns it as a
      * {@link String}, sans trailing line ending. Supports CR ({@code \r}),
-     * LF ({@code \n}), and CRLF ({@code \r\n}) as line endings. If user inputs
-     * only {@code "\n"}, returns {@code ""}, not {@code null}. Returns {@code null}
-     * upon error or no input whatsoever (i.e., just {@code EOF}).
+     * LF ({@code \n}), and CRLF ({@code \r\n}) as line endings. Returns ""
+     * if user inputs only CR, LF, or CRLF. Returns "" upon no input
+     * whatsoever (i.e., EOF). Returns {@code null} upon error.
      *
      * @return String
      */
