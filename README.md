@@ -2,7 +2,7 @@
 
 ## Documentation
 
-http://cs50.github.io/lib50-java/
+http://cs50.github.io/lib50-java/edu/harvard/CS50.html
 
 ## Development
 
