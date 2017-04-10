@@ -5,7 +5,7 @@ VERSION = 2.0.0
 
 BUILD_DIR = build
 DEB_DIR = $(BUILD_DIR)/deb
-DOCS_DIR = $(BUILD_DIR)/docs
+DOCS_DIR = docs
 JAR_DIR = $(BUILD_DIR)/usr/java/packages/lib/ext
 PACMAN_DIR = $(BUILD_DIR)/pacman
 RPM_DIR = $(BUILD_DIR)/rpm
