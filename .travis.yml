@@ -1,0 +1,15 @@
+language: java
+
+script: make docs
+
+deploy:
+  # deploy to GitHub Pages
+  provider: pages
+  local_dir: docs
+  name: bot50
+  email: bot@cs50.harvard.edu
+  # fqdn: docs.cs50.net
+  github_token: $GITHUB_TOKEN
+  skip_cleanup: true
+  on:
+    branch: master  
