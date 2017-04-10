@@ -257,6 +257,7 @@ public class CS50
     public static String getString(String prompt)
     {
         // try to get a String from user, returning null on error
+        System.out.print(prompt);
         Scanner s = new Scanner(System.in).useDelimiter("\\n|\\r|\\r\\n");
         try
         {
