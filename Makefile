@@ -1,6 +1,7 @@
 DESCRIPTION = CS50 Library for Java
 MAINTAINER = CS50 <sysadmins@cs50.harvard.edu>
-NAME = lib50-java
+OLD_NAME = lib50-java
+NAME = libcs50-java
 VERSION = 2.0.0
 
 BUILD_DIR = build
@@ -40,6 +41,9 @@ deb: build
 	-s dir \
 	-t deb \
 	-v "$(VERSION)" \
+	--conflicts $(OLD_NAME) \
+	--provides $(OLD_NAME) \
+	--replaces $(OLD_NAME) \
 	--deb-no-default-config-files \
 	--depends java7-runtime \
 	--description "$(DESCRIPTION)" \
