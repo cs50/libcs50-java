@@ -1,5 +1,9 @@
 # CS50 Library for Java
 
+## Documentation
+
+http://cs50.github.io/lib50-java/
+
 ## Development
 
 Requires [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
