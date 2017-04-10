@@ -1,10 +1,10 @@
 /**
  * CS50 Library for Java
- * https://github.com/cs50/java
+ * https://github.com/cs50/lib50-java
  *
  * Port of CS50 Library to Java from C.
  *
- * Copyright (c) 2016,
+ * Copyright (c) 2017,
  * David J. Malan <malan@harvard.edu>
  * Kareem Zidane <kzidane@cs50harvard.edu>
  * All rights reserved.
@@ -83,13 +83,13 @@ public class CS50
      *
      * @return char
      */
-    public static char getChar()
+    public static char getChar(String prompt)
     {
         // try to get a char from user
         while (true)
         {
             // get a line of text, returning {@link Character#MAX_VALUE} on error
-            String s = CS50.getString();
+            String s = CS50.getString(prompt);
             if (s == null)
             {
                 return Character.MAX_VALUE;
@@ -99,10 +99,6 @@ public class CS50
             if (s.length() == 1)
             {
                 return s.charAt(0);
-            }
-            else
-            {
-                System.out.print("Retry: ");
             }
         }
     }
@@ -115,22 +111,22 @@ public class CS50
      *
      * @return double
      */
-    public static double getDouble()
+    public static double getDouble(String prompt)
     {
         // try to get a double from user
         while (true)
         {
             // get a line of text, returning {@link Double#MAX_VALUE} on error
-            String s = CS50.getString();
+            String s = CS50.getString(prompt);
             if (s == null)
             {
                 return Double.MAX_VALUE;
             }
 
             // return a {@code double} if only a {@code double} was provided
-            try
+            if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
             {
-                if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
+                try
                 {
                     double d = Double.parseDouble(s);
                     if (!Double.isInfinite(d) && d < Double.MAX_VALUE)
@@ -138,11 +134,8 @@ public class CS50
                         return d;
                     }
                 }
-                throw new NumberFormatException();
-            }
-            catch (Exception e)
-            {
-                System.out.print("Retry: ");
+                catch (Exception e)
+                {}
             }
         }
     }
@@ -155,22 +148,22 @@ public class CS50
      *
      * @return float
      */
-    public static float getFloat()
+    public static float getFloat(String prompt)
     {
         // try to get a float from user
         while (true)
         {
             // get a line of text, returning {@link Float#MAX_VALUE} on error
-            String s = CS50.getString();
+            String s = CS50.getString(prompt);
             if (s == null)
             {
                 return Float.MAX_VALUE;
             }
 
             // return a {@code float} if only a {@code float} was provided
-            try
+            if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
             {
-                if (s.matches("(\\+|-)?\\d*(\\.\\d*)?"))
+                try
                 {
                     float f = Float.parseFloat(s);
                     if (!Float.isInfinite(f) && f < Float.MAX_VALUE)
@@ -178,11 +171,8 @@ public class CS50
                         return f;
                     }
                 }
-                throw new NumberFormatException();
-            }
-            catch (Exception e)
-            {
-                System.out.print("Retry: ");
+                catch (Exception e)
+                {}
             }
         }
     }
@@ -196,30 +186,27 @@ public class CS50
      *
      * @return int
      */
-    public static int getInt()
+    public static int getInt(String prompt)
     {
         // try to get an int from user
         while (true)
         {
             // get a line of text, returning {@link Integer.MAX_VALUE} on error
-            String s = CS50.getString();
+            String s = CS50.getString(prompt);
             if (s == null)
             {
                 return Integer.MAX_VALUE;
             }
 
             // return an {@code int} if only an {@code int} was provided
-            try
+            if (s.matches("(\\+|-)?\\d+"))
             {
-                if (s.matches("(\\+|-)?\\d+"))
+                try
                 {
                     return Integer.parseInt(s);
                 }
-                throw new NumberFormatException();
-            }
-            catch (Exception e)
-            {
-                System.out.print("Retry: ");
+                catch (Exception e)
+                {}
             }
         }
     }
@@ -233,30 +220,27 @@ public class CS50
      *
      * @return long
      */
-    public static long getLong()
+    public static long getLong(String prompt)
     {
         // try to get a long from user
         while (true)
         {
             // get a line of text, returning {@link Long.MAX_VALUE} on error
-            String s = CS50.getString();
+            String s = CS50.getString(prompt);
             if (s == null)
             {
                 return Long.MAX_VALUE;
             }
 
             // return a {@code long} if only a {@code long} was provided
-            try
+            if (s.matches("(\\+|-)?\\d+"))
             {
-                if (s.matches("(\\+|-)?\\d+"))
+                try
                 {
                     return Long.parseLong(s);
                 }
-                throw new NumberFormatException();
-            }
-            catch (Exception e)
-            {
-                System.out.print("Retry: ");
+                catch (Exception e)
+                {}
             }
         }
     }
@@ -270,9 +254,10 @@ public class CS50
      *
      * @return String
      */
-    public static String getString()
+    public static String getString(String prompt)
     {
         // try to get a String from user, returning null on error
+        System.out.print(prompt);
         Scanner s = new Scanner(System.in).useDelimiter("\\n|\\r|\\r\\n");
         try
         {
