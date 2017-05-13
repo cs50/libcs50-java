@@ -58,6 +58,8 @@ public class CS50
         System.setOut(new PrintStream(new BufferedOutputStream(new FileOutputStream(FileDescriptor.out), 1)));
     }
 
+    private static Scanner s = null;
+
     /**
      * Prevents instantiation of class (since all methods are static).
      */
@@ -256,9 +258,13 @@ public class CS50
      */
     public static String getString(String prompt)
     {
+
+        // instantiate scanner once
+        if (s == null)
+            s = new Scanner(System.in);
+
         // try to get a String from user, returning null on error
         System.out.print(prompt);
-        Scanner s = new Scanner(System.in).useDelimiter("\\n|\\r|\\r\\n");
         try
         {
             return s.nextLine();
