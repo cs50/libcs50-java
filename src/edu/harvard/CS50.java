@@ -47,6 +47,8 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class CS50
 {
@@ -258,10 +260,10 @@ public class CS50
     {
         // try to get a String from user, returning null on error
         System.out.print(prompt);
-        Scanner s = new Scanner(System.in).useDelimiter("\\n|\\r|\\r\\n");
+        BufferedReader br = new BufferedReader(InputStreamReader(system.in));
         try
         {
-            return s.nextLine();
+            return br.readLine();
         }
         catch (Exception e)
         {
