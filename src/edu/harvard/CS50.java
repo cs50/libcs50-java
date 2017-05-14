@@ -46,7 +46,8 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 public class CS50
 {
@@ -76,6 +77,7 @@ public class CS50
         System.err.printf(format, args);
     }
 
+    
     /**
      * Reads a line of text from standard input and returns the equivalent
      * {@code char}; if text does not represent a {@code char}, user is prompted
@@ -258,14 +260,12 @@ public class CS50
     {
         // try to get a String from user, returning null on error
         System.out.print(prompt);
-        Scanner s = new Scanner(System.in).useDelimiter("\\n|\\r|\\r\\n");
-        try
+        if(br == null)                
         {
-            return s.nextLine();
-        }
-        catch (Exception e)
-        {
-            return null;
+            try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in)))
+            {
+                return s.readLine();
+            }
         }
     }
 }
