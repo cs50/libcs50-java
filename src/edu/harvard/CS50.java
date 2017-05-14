@@ -260,7 +260,7 @@ public class CS50
     {
         // try to get a String from user, returning null on error
         System.out.print(prompt);
-        BufferedReader br = new BufferedReader(InputStreamReader(system.in));
+        BufferedReader br = new BufferedReader(InputStreamReader(System.in));
         try
         {
             return br.readLine();
