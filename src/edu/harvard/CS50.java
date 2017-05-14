@@ -269,9 +269,5 @@ public class CS50
                 return s.readLine();
             }
         }
-        catch (Exception e)
-        {
-            return null;
-        }
     }
 }
