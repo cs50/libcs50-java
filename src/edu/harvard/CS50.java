@@ -77,9 +77,7 @@ public class CS50
         System.err.printf(format, args);
     }
 
-    // Single instantiation.
-    private static BufferedReader br = null;
-
+    
     /**
      * Reads a line of text from standard input and returns the equivalent
      * {@code char}; if text does not represent a {@code char}, user is prompted
@@ -264,7 +262,7 @@ public class CS50
         System.out.print(prompt);
         if(br == null)                
         {
-            try(br = new BufferedReader(new InputStreamReader(System.in)))
+            try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in)))
             {
                 return s.readLine();
             }
