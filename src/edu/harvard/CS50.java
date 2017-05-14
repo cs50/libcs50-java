@@ -46,9 +46,8 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Scanner;
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.BufferedReader;
 
 public class CS50
 {
@@ -77,6 +76,9 @@ public class CS50
         System.err.print(stackTrace[2].getFileName() + ":" + stackTrace[2].getLineNumber() + ": ");
         System.err.printf(format, args);
     }
+
+    // Single instantiation.
+    private static BufferedReader br = null;
 
     /**
      * Reads a line of text from standard input and returns the equivalent
@@ -260,10 +262,12 @@ public class CS50
     {
         // try to get a String from user, returning null on error
         System.out.print(prompt);
-        BufferedReader br = new BufferedReader(InputStreamReader(System.in));
-        try
+        if(br == null)                
         {
-            return br.readLine();
+            try(br = new BufferedReader(new InputStreamReader(System.in)))
+            {
+                return s.readLine();
+            }
         }
         catch (Exception e)
         {
