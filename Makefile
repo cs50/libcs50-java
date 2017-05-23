@@ -2,7 +2,7 @@ DESCRIPTION = CS50 Library for Java
 MAINTAINER = CS50 <sysadmins@cs50.harvard.edu>
 OLD_NAME = lib50-java
 NAME = libcs50-java
-VERSION = 2.0.1
+VERSION = 2.0.0
 
 BUILD_DIR = build
 DEB_DIR = $(BUILD_DIR)/deb
