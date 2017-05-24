@@ -59,6 +59,13 @@ public class CS50
     }
 
     /**
+     * Singleton to avoid buffering of standard input.
+     *
+     * @see http://stackoverflow.com/a/4232614/1797347
+     */
+    private final static Scanner scanner = new Scanner(System.in);
+
+    /**
      * Prevents instantiation of class (since all methods are static).
      */
     private CS50()
@@ -258,10 +265,9 @@ public class CS50
     {
         // try to get a String from user, returning null on error
         System.out.print(prompt);
-        Scanner s = new Scanner(System.in).useDelimiter("\\n|\\r|\\r\\n");
         try
         {
-            return s.nextLine();
+            return CS50.scanner.nextLine();
         }
         catch (Exception e)
         {

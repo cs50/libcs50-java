@@ -52,7 +52,7 @@ deb: build
 .PHONY: docs
 docs:
 	rm -rf $(DOCS_DIR)
-	javadoc -d "$(DOCS_DIR)" -sourcepath src edu.harvard
+	javadoc -d "$(DOCS_DIR)" -linkoffline https://docs.oracle.com/javase/8/docs/api/ https://docs.oracle.com/javase/8/docs/api/ -sourcepath src edu.harvard
 
 # TODO: add dependencies
 .PHONY: pacman
