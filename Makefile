@@ -1,5 +1,5 @@
 DESTDIR ?= /usr/local/share/java
-VERSION = 2.0.0
+VERSION = 2.0.1
 
 .PHONY: build
 build: clean Makefile src/edu/harvard/CS50.java
