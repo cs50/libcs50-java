@@ -44,8 +44,6 @@ import java.io.BufferedOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Scanner;
 
 public class CS50
