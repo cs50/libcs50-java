@@ -21,7 +21,7 @@ set -e
 case "$1" in
     configure)
         mkdir -p /usr/java/packages/lib/ext
-        ln -s /usr/share/java/cs50.jar /usr/java/packages/lib/ext
+        ln -fs /usr/share/java/cs50.jar /usr/java/packages/lib/ext
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
