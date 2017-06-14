@@ -6,7 +6,7 @@
  *
  * Copyright (c) 2017,
  * David J. Malan <malan@harvard.edu>
- * Kareem Zidane <kzidane@cs50harvard.edu>
+ * Kareem Zidane <kzidane@cs50.harvard.edu>
  * All rights reserved.
  *
  * BSD 3-Clause License
@@ -44,8 +44,6 @@ import java.io.BufferedOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Scanner;
 
 public class CS50
@@ -75,6 +73,18 @@ public class CS50
      * Prints an error message, formatted like {@link java.io.PrintStream#printf},
      * to standard error, prefixing it with program's name as well as the file and
      * line number from which method was called.
+     *
+     * @param format A format string as described in
+     *               <a href="https://docs.oracle.com/javase/8/docs/api/java.util.Formatter.html#syntax">Format string syntax</a>
+     *
+     * @param  args Arguments referenced by the format specifiers in the format
+     *         string. If there are more arguments than format specifiers, the
+     *         extra arguments are ignored. The number of arguments is variable
+     *         and may be zero.  The maximum number of arguments is limited by
+     *         the maximum dimension of a Java array as defined by
+     *         <cite>The Java&trade; Virtual Machine Specification</cite>. The
+     *         behaviour on a <tt>null</tt> argument depends on the
+     *         <a href="https://docs.oracle.com/javase/8/docs/api/java.util.Formatter.html#syntax">conversion</a>.
      */
     public static void eprintf(String format, Object... args)
     {
@@ -88,6 +98,7 @@ public class CS50
      * {@code char}; if text does not represent a {@code char}, user is prompted
      * to retry. If line can't be read, returns {@link Character#MAX_VALUE}.
      *
+     * @param prompt A string that prompts the user to provide input.
      * @return char
      */
     public static char getChar(String prompt)
@@ -116,6 +127,7 @@ public class CS50
      * {@code double} or if value would cause underflow or overflow, user is
      * prompted to retry. If line can't be read, returns {@link Double#MAX_VALUE}.
      *
+     * @param prompt A string that prompts the user to provide input.
      * @return double
      */
     public static double getDouble(String prompt)
@@ -153,6 +165,7 @@ public class CS50
      * {@code float} or if value would cause underflow or overflow, user is
      * prompted to retry. If line can't be read, returns {@link Float#MAX_VALUE}.
      *
+     * @param prompt A string that prompts the user to provide input.
      * @return float
      */
     public static float getFloat(String prompt)
@@ -191,6 +204,7 @@ public class CS50
      * cause underflow or overflow, user is prompted to retry. If line
      * can't be read, returns {@link Integer#MAX_VALUE}.
      *
+     * @param prompt A string that prompts the user to provide input.
      * @return int
      */
     public static int getInt(String prompt)
@@ -225,6 +239,7 @@ public class CS50
      * cause underflow or overflow, user is prompted to retry. If line
      * can't be read, returns {@link Long#MAX_VALUE}.
      *
+     * @param prompt A string that prompts the user to provide input.
      * @return long
      */
     public static long getLong(String prompt)
@@ -259,6 +274,7 @@ public class CS50
      * if user inputs only CR, LF, or CRLF. Returns "" upon no input
      * whatsoever (i.e., EOF). Returns {@code null} upon error.
      *
+     * @param prompt A string that prompts the user to provide input.
      * @return String
      */
     public static String getString(String prompt)

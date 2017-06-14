@@ -3,3 +3,5 @@
 !.travis.yml
 build/
 docs/
+debian/changelog
+debian/*.log
