@@ -1,6 +1,9 @@
 language: java
+jdk: openjdk7
 dist: trusty
 sudo: required
+branches:
+  except: "/^v\\d/"
 before_install: sudo apt-get install build-essential debhelper devscripts dh-make lintian
 install: true
 before_script: echo -e $GPG_SECRET | gpg --import
