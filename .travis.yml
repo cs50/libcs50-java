@@ -1,8 +1,24 @@
 language: java
-script: make build
+dist: trusty
+sudo: required
+before_install: sudo apt-get install build-essential debhelper devscripts dh-make lintian
+install: true
+before_script: echo -e $GPG_SECRET | gpg --import
+script: make deb
 before_deploy: make docs
 deploy:
-  provider: pages
+- provider: script
+  script: 'curl --fail --data "{ \"tag_name\": \"v$(make version)\",
+    \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(make version)\"
+  }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
+  on:
+    branch: master
+- provider: script
+  script: dput ppa:cs50/ppa build/deb/*.changes
+  skip_cleanup: true
+  on:
+    branch: master
+- provider: pages
   local_dir: docs
   name: bot50
   email: bot@cs50.harvard.edu

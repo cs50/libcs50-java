@@ -1,85 +1,41 @@
-DESCRIPTION = CS50 Library for Java
-MAINTAINER = CS50 <sysadmins@cs50.harvard.edu>
-OLD_NAME = lib50-java
-NAME = libcs50-java
-VERSION = 2.0.0
-
-BUILD_DIR = build
-DEB_DIR = $(BUILD_DIR)/deb
-DOCS_DIR = docs
-JAR_DIR = $(BUILD_DIR)/usr/java/packages/lib/ext
-PACMAN_DIR = $(BUILD_DIR)/pacman
-RPM_DIR = $(BUILD_DIR)/rpm
-
-.PHONY: all
-all: clean deb pacman rpm
-
-.PHONY: bash
-bash:
-	docker run -i --rm -t -v "$(PWD):/root" cs50/cli
+DESTDIR ?= /usr/local/share/java
+VERSION = 2.0.1
 
 .PHONY: build
 build: clean Makefile src/edu/harvard/CS50.java
-	mkdir -p "$(JAR_DIR)"
-	javac -d "$(BUILD_DIR)" src/edu/harvard/CS50.java
-	jar cvf "$(JAR_DIR)/cs50.jar" -C "$(BUILD_DIR)" .
-	find "$(BUILD_DIR)" -type d -exec chmod 0755 {} +
-	find "$(BUILD_DIR)" -type f -exec chmod 0644 {} +
+	mkdir -p build/usr/share/java
+	javac -d build src/edu/harvard/CS50.java
+	cp src/edu/harvard/CS50.java build/edu/harvard
+	jar cvf build/usr/share/java/cs50.jar -C build .
 
 .PHONY: clean
 clean:
-	rm -rf "$(BUILD_DIR)"
+	rm -rf build libcs50-java* libcs50-java_*
 
 .PHONY: deb
 deb: build
-	mkdir -p "$(DEB_DIR)"
-	fpm \
-	-C "$(BUILD_DIR)" \
-	-m "$(MAINTAINER)" \
-	-n "$(NAME)" \
-	-p "$(DEB_DIR)" \
-	-s dir \
-	-t deb \
-	-v "$(VERSION)" \
-	--conflicts $(OLD_NAME) \
-	--provides $(OLD_NAME) \
-	--replaces $(OLD_NAME) \
-	--deb-no-default-config-files \
-	--depends java7-runtime \
-	--description "$(DESCRIPTION)" \
-	usr
+	@echo "libcs50-java ($(VERSION)-0ubuntu1) trusty; urgency=low" > debian/changelog
+	@echo "  * v$(VERSION)" >> debian/changelog
+	@echo " -- CS50 Sysadmins <sysadmins@cs50.harvard.edu>  $$(date --rfc-2822)" >> debian/changelog
+	mkdir -p libcs50-java-$(VERSION)
+	rsync -a build/usr libcs50-java-$(VERSION)
+	tar -cvzf libcs50-java_$(VERSION).orig.tar.gz libcs50-java-$(VERSION)
+	cp -r debian libcs50-java-$(VERSION)
+	cd libcs50-java-$(VERSION) && debuild -S -sa --lintian-opts --display-info --info --show-overrides
+	mkdir -p build/deb
+	mv libcs50-java* build/deb
 
 .PHONY: docs
 docs:
-	rm -rf $(DOCS_DIR)
-	javadoc -d "$(DOCS_DIR)" -linkoffline https://docs.oracle.com/javase/8/docs/api/ https://docs.oracle.com/javase/8/docs/api/ -sourcepath src edu.harvard
+	rm -rf docs
+	javadoc -d docs  -linkoffline https://docs.oracle.com/javase/8/docs/api/ \
+		https://docs.oracle.com/javase/8/docs/api/ -sourcepath src edu.harvard
 
-# TODO: add dependencies
-.PHONY: pacman
-pacman: build
-	mkdir -p "$(PACMAN_DIR)"
-	fpm \
-	-C "$(BUILD_DIR)" \
-	-m "$(MAINTAINER)" \
-	-n "$(NAME)" \
-	-p "$(PACMAN_DIR)" \
-	-s dir \
-	-t pacman \
-	-v "$(VERSION)" \
-	--description "$(DESCRIPTION)" \
-	usr
+.PHONY: install
+install: build
+	mkdir -p $(DESTDIR)
+	cp -r build/usr/share/java/cs50.jar $(DESTDIR)
 
-# TODO: add dependencies
-.PHONY: rpm
-rpm: build
-	mkdir -p "$(RPM_DIR)"
-	fpm \
-	-C "$(BUILD_DIR)" \
-	-m "$(MAINTAINER)" \
-	-n "$(NAME)" \
-	-p "$(RPM_DIR)" \
-	-s dir \
-	-t rpm \
-	-v "$(VERSION)" \
-	--description "$(DESCRIPTION)" \
-	usr
+.PHONY: version
+version:
+	@echo $(VERSION)
