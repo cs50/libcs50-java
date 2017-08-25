@@ -5,3 +5,5 @@ build/
 docs/
 debian/changelog
 debian/*.log
+debian/debhelper-build-stamp
+debian/libcs50-java/
