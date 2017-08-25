@@ -1,34 +1,29 @@
 language: java
 jdk: openjdk7
-dist: trusty
 sudo: required
 branches:
   except: "/^v\\d/"
+env:
+  matrix:
+  - DIST=precise DIST_VERSION=12.04
+  - DIST=raring DIST_VERSION=13.04
+  - DIST=trusty DIST_VERSION=14.04
+  - DIST=vivid DIST_VERSION=15.04
+  - DIST=xenial DIST_VERSION=16.04
+  - DIST=zesty DIST_VERSION=17.04
 before_install: sudo apt-get install build-essential debhelper devscripts dh-make lintian
 install: true
-before_script: echo -e $GPG_SECRET | gpg --import
+before_script: if [ "$TRAVIS_BRANCH" != "master" ]; then export SIGNING_OPTS="-uc -us"; fi
 script: make deb
-before_deploy: make docs
+before_deploy:
+- make docs
+- echo -e $GPG_SECRET | gpg --import
 deploy:
-- provider: script
-  script: 'curl --fail --data "{ \"tag_name\": \"v$(make version)\",
-    \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(make version)\"
-  }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
-  on:
-    branch: master
-- provider: script
+  provider: script
   script: dput ppa:cs50/ppa build/deb/*.changes
-  skip_cleanup: true
-  on:
-    branch: master
-- provider: pages
-  local_dir: docs
-  name: bot50
-  email: bot@cs50.harvard.edu
-  github_token: "$GITHUB_TOKEN"
   skip_cleanup: true
   on:
     branch: master
 notifications:
   slack:
-    secure: cVjo0NnU2yj8YF68D9vSyTTmEQ+H1QApdC4+1wVzJ9eTSVKc0KL5sfADIAdKlHGlkldvRfYqv6EIqmDlzDn+Nra8zZQj3YfTRo53qzrVZ0VNHVeVHYsxWCQJAPqv44St8i6DpCqcvFnGqissq1ebavuwt8AHnW7cmeHDdV70jK3YsusTd8RdxYNQXPLsjSUDivi+K0s7rYysVxxy26GKVOYH0u0A/zV5JqJ99gnoAAcxPgAQlg3gnB/cKxHilAAlTzoXTEWoFbpPgfCrFb5HSWvUP6BKLlyR4LjjFEyFCW9uv0VPTLaqMWBE2EXv0R8PaYHmmExH2a1XHfmmUIckSXM1IqV1LmMLJV29uEb+0+kOl4evRWTFCjEx4Ic1pCuKLMaj3cINqtGap6Sd6UfIaLLDSbMc4U+JfwVom9H65tlwLnZTgvgO79EDvuBMQ/meyuZQg4xiwf8Q4lFLSdLQxYk2PeAyQLU/R8S/4C80KpRnFR7Gj6aDARu4KkNaWjIPRctmBK2jU9HvmHviEj0PqRyU62cDi3C5x2ZY/MIDsxun5GRv92/GiV8iaAvLJFrT8jQdXAvbKJKX7OxVBQxCuP//8m51Ow8lKwqOcjcE3odRaBM8NBfN4oO3VyFBO9qUfTk7+z333DJ14KXUFGwDt1SHPwRgHxWNCpe7rb2CxFc=
+    secure: ozhL9jaDDPMDj8FRStc+hMCT98rchuYNqN++pJBLN+/kbIGs8bAuEDDUp/kQbBSGp/Cw3aPjdjdnVNNkLc0D5btJvMxxJY2YLN7MtB7GdjSvqfLEq9RVZocP4RHiDSwsrvrWtzBI13bU9MC77Ouds83y+lG7nzhjyxKJjh4sXjxEeKsRTU6cteyrAkD8l+OTzgt/Fu6+Fh1TsxmWm6P7xWMwvz23QSdnDrVl5Hr5OAxtMCdlYi/+B5b4HzjV4nxk7JYUMULXIWtDaEueA4aQ6nzgRnVGTkqCSzeFCcVTNxtDd2/qQok/KcDK5I+yWpkgMCUg2jax7Qd4KY704IM2D8f87o5XE0gYlFLMZAKKpXCdNqsydBk7apu87Ou6m7qSJY42pggM73LjgFW2/d/t3zdv1qY1pgvgL5+Ke+LupkBFd6yPhqPVIFCzTujaA1VcsptEP5wRRfMjwVuL/wYlNclb+mPEfY15hzSIpYwXxPk2SJ7ySTtG0TgsP5zMe56Tb67UC/EAVf7jnAYkbGhrSw3KlEsnVhbGlSbtqLU7BBUwkx6kYAzm0rnykXIL/Tur8jRY3k28cdTSg/9LQtFf7ceGT9yZYZ6SarTIaSwwdMaehcknzCj4O0fun9RJzWmJWKLDXvhGfG2ekxpOAMQX1pJxJSHag40HNAtcPAe5skE=

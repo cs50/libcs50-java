@@ -14,14 +14,15 @@ clean:
 
 .PHONY: deb
 deb: build
-	@echo "libcs50-java ($(VERSION)-0ubuntu1) trusty; urgency=low" > debian/changelog
+	rm -rf build/deb &>/dev/null
+	@echo "libcs50-java ($(VERSION)-0ubuntu$(DIST_VERSION)) $(DIST); urgency=low" > debian/changelog
 	@echo "  * v$(VERSION)" >> debian/changelog
 	@echo " -- CS50 Sysadmins <sysadmins@cs50.harvard.edu>  $$(date --rfc-2822)" >> debian/changelog
 	mkdir -p libcs50-java-$(VERSION)
-	rsync -a build/usr libcs50-java-$(VERSION)
-	tar -cvzf libcs50-java_$(VERSION).orig.tar.gz libcs50-java-$(VERSION)
+	cp -r build/usr libcs50-java-$(VERSION)
+	GZIP=-n tar --mtime='1970-01-01' -cvzf libcs50-java_$(VERSION).orig.tar.gz libcs50-java-$(VERSION)
 	cp -r debian libcs50-java-$(VERSION)
-	cd libcs50-java-$(VERSION) && debuild -S -sa --lintian-opts --display-info --info --show-overrides
+	cd libcs50-java-$(VERSION) && debuild $(SIGNING_OPTS) -S -sa --lintian-opts --display-info --info --show-overrides
 	mkdir -p build/deb
 	mv libcs50-java* build/deb
 
