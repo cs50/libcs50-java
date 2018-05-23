@@ -1,26 +1,82 @@
+packagecloud: &packagecloud
+  provider: packagecloud
+  username: cs50
+  repository: libcs50-java
+  token: $PACKAGECLOUD_TOKEN
+  local-dir: build/deb
+  package_glob: *.deb
+  skip_cleanup: true
+  on:
+    branch: master
+
 language: java
 jdk: openjdk7
-dist: trusty
-sudo: required
 branches:
   except: "/^v\\d/"
-before_install: sudo apt-get install build-essential debhelper devscripts dh-make lintian
+before_install: gem install fpm
 install: true
-before_script: echo -e $GPG_SECRET | gpg --import
 script: make deb
 before_deploy: make docs
 deploy:
+  # 12.04
+  - <<: *packagecloud
+    dist: ubuntu/precise
+
+  # 12.10
+  - <<: *packagecloud
+    dist: ubuntu/quantal
+
+  # 13.04
+  - <<: *packagecloud
+    dist: ubuntu/raring
+
+  # 13.10
+  - <<: *packagecloud
+    dist: ubuntu/saucy
+
+  # 14.04
+  - <<: *packagecloud
+    dist: ubuntu/trusty
+
+  # 14.10
+  - <<: *packagecloud
+    dist: ubuntu/utopic
+
+  # 15.04
+  - <<: *packagecloud
+    dist: ubuntu/vivid
+
+  # 15.10
+  - <<: *packagecloud
+    dist: ubuntu/wily
+
+  # 16.04
+  - <<: *packagecloud
+    dist: ubuntu/xenial
+
+  # 16.10
+  - <<: *packagecloud
+    dist: ubuntu/yakkety
+
+  # 17.04
+  - <<: *packagecloud
+    dist: ubuntu/zesty
+
+  # 17.10
+  - <<: *packagecloud
+    dist: ubuntu/artful
+
+  # 18.04
+  - <<: *packagecloud
+    dist: ubuntu/bionic
+
 - provider: script
   script: 'curl --fail --data "{ \"tag_name\": \"v$(make version)\",
     \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(make version)\"
   }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
   on:
     branch: master
-- provider: script
-  script: dput ppa:cs50/ppa build/deb/*.changes
-  skip_cleanup: true
-  on:
-    branch: master
+
 - provider: pages
   local_dir: docs
   name: bot50
