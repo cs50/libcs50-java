@@ -22,30 +22,55 @@ clean:
 deb: jar
 	rm -rf build/deb
 	mkdir -p build/deb/libcs50-java/usr/share/java
-	cp -r build/jar/* build/deb/libcs50-java/usr/share/java 
+	cp -r build/jar/* build/deb/libcs50-java/usr/share/java
 
 	fpm \
-	--category java \
-	--conflicts lib50-java \
-	--chdir build/deb/libcs50-java \
-	--deb-priority optional \
-	--description "CS50 library for Java" \
-	--input-type dir \
-	--license "" \
-	--maintainer "CS50 <sysadmins@cs50.harvard.edu>" \
-	--name libcs50-java \
-	--output-type deb \
-	--package build/deb \
-	--provides lib50-java \
-	--provides libcs50-java \
-	--replaces lib50-java \
-	--replaces libcs50-java \
-	--url https://github.com/cs50/libcs50-java \
-	--vendor CS50 \
-	--version $(VERSION) \
-	.
+	    --category java \
+	    --conflicts lib50-java \
+	    --chdir build/deb/libcs50-java \
+	    --deb-priority optional \
+	    --description "CS50 library for Java" \
+	    --input-type dir \
+	    --license "MIT" \
+	    --maintainer "CS50 <sysadmins@cs50.harvard.edu>" \
+	    --name libcs50-java \
+	    --output-type deb \
+	    --package build/deb \
+	    --provides lib50-java \
+	    --provides libcs50-java \
+	    --replaces lib50-java \
+	    --replaces libcs50-java \
+	    --url https://github.com/cs50/libcs50-java \
+	    --vendor CS50 \
+	    --version $(VERSION) \
+	    .
 
 	rm -rf build/deb/libcs50-java
+
+.PHONY: rpm
+rpm: jar
+	rm -rf build/rpm
+	mkdir -p build/rpm/libcs50-java/usr/share/java
+	cp -r build/jar/* build/rpm/libcs50-java/usr/share/java
+
+	fpm \
+	    --category java \
+	    --conflicts lib50-java \
+	    --chdir build/rpm/libcs50-java \
+	    --description "CS50 library for Java" \
+	    --input-type dir \
+		--license "MIT" \
+	    --maintainer "CS50 <sysadmins@cs50.harvard.edu>" \
+	    --name libcs50-java \
+	    --output-type rpm \
+	    --package build/rpm \
+	    --provides libcs50-java \
+	    --url https://github.com/cs50/libcs50-java \
+	    --vendor CS50 \
+	    --version $(VERSION) \
+	    .
+
+	rm -rf build/rpm/libcs50-java
 
 .PHONY: docs
 docs:
