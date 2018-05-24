@@ -7,10 +7,30 @@ http://cs50.github.io/libcs50-java/edu/harvard/CS50.html
 ## Development
 
 ```
-    make build # builds class and JAR file
+    make build # builds class
+    make jar # builds jar
     make docs # builds documentation
-    make deb # builds source deb package
+    make deb # builds deb package
 ```
+
+## Installation
+
+### Ubuntu
+
+```
+$ curl -s https://packagecloud.io/install/repositories/cs50/libcs50-java/script.deb.sh | sudo bash
+$ sudo apt-get install libcs50-java
+```
+
+### From Source
+
+1. Download the latest release from https://github.com/cs50/libcs50-java/releases
+1. Extract `libcs50-java*`
+1. cd `libcs50-java*`
+1. `make install # may require sudo`
+
+By default, we install to `/usr/local/share/java`. If you'd like to change the installation location, run `DESTDIR=/path/to/install make install` as desired.
+
 
 ## Usage
 
