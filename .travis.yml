@@ -36,63 +36,56 @@ before_deploy: |
   fi
 deploy:
   # 12.04
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/precise
 
   # 12.10
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/quantal
 
   # 13.04
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/raring
 
   # 13.10
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/saucy
 
   # 14.04
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/trusty
 
   # 14.10
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/utopic
 
   # 15.04
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/vivid
 
   # 15.10
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/wily
 
   # 16.04
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/xenial
 
   # 16.10
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/yakkety
 
   # 17.04
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/zesty
 
   # 17.10
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/artful
 
   # 18.04
-  - <<: *packagecloud
+  - <<: *deb
     dist: ubuntu/bionic
-
-- provider: script
-  script: 'curl --fail --data "{ \"tag_name\": \"v$(make version)\",
-    \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(make version)\"
-  }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
-  on:
-    branch: master
 
   # Fedora
   - <<: *rpm
@@ -117,7 +110,7 @@ deploy:
     local_dir: docs
     name: bot50
     email: bot@cs50.harvard.edu
-    github_token: "$GITHUB_TOKEN"
+    github_token: $GITHUB_TOKEN
     skip_cleanup: true
     on:
       branch: master
