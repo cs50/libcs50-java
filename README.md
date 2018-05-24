@@ -26,7 +26,7 @@ $ sudo apt-get install libcs50-java
 
 ```
 $ curl -s https://packagecloud.io/install/repositories/cs50/libcs50-java/script.rpm.sh | sudo bash
-$ sudo yum install libcs50
+$ sudo yum install libcs50-java
 ```
 
 ### From Source
