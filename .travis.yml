@@ -3,20 +3,37 @@ packagecloud: &packagecloud
   username: cs50
   repository: libcs50-java
   token: $PACKAGECLOUD_TOKEN
-  local-dir: build/deb
-  package_glob: *.deb
   skip_cleanup: true
   on:
     branch: master
 
+deb: &deb
+  <<: *packagecloud
+  local-dir: build/deb
+
+rpm: &rpm
+  <<: *packagecloud
+  local-dir: build/rpm
+
 language: java
 jdk: openjdk7
+addons:
+  apt:
+    packages: rpm
 branches:
   except: "/^v\\d/"
 before_install: gem install fpm
 install: true
-script: make deb
-before_deploy: make docs
+script:
+  - make deb
+  - make rpm
+  - make docs
+before_deploy: |
+  if [ -z "$(git tag --list "v$(make version)")" ]; then \
+      git config --local user.name "bot50"; \
+      git config --local user.email "bot@cs50.harvard.edu"; \
+      git tag "v$(make version)"; \
+  fi
 deploy:
   # 12.04
   - <<: *packagecloud
@@ -77,14 +94,33 @@ deploy:
   on:
     branch: master
 
-- provider: pages
-  local_dir: docs
-  name: bot50
-  email: bot@cs50.harvard.edu
-  github_token: "$GITHUB_TOKEN"
-  skip_cleanup: true
-  on:
-    branch: master
+  # Fedora
+  - <<: *rpm
+    dist: fedora/24
+  - <<: *rpm
+    dist: fedora/25
+  - <<: *rpm
+    dist: fedora/26
+  - <<: *rpm
+    dist: fedora/27
+  - <<: *rpm
+    dist: fedora/28
+
+  # GitHub release
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    skip_cleanup: true
+    on:
+      branch: master
+
+  - provider: pages
+    local_dir: docs
+    name: bot50
+    email: bot@cs50.harvard.edu
+    github_token: "$GITHUB_TOKEN"
+    skip_cleanup: true
+    on:
+      branch: master
 notifications:
   slack:
     secure: cVjo0NnU2yj8YF68D9vSyTTmEQ+H1QApdC4+1wVzJ9eTSVKc0KL5sfADIAdKlHGlkldvRfYqv6EIqmDlzDn+Nra8zZQj3YfTRo53qzrVZ0VNHVeVHYsxWCQJAPqv44St8i6DpCqcvFnGqissq1ebavuwt8AHnW7cmeHDdV70jK3YsusTd8RdxYNQXPLsjSUDivi+K0s7rYysVxxy26GKVOYH0u0A/zV5JqJ99gnoAAcxPgAQlg3gnB/cKxHilAAlTzoXTEWoFbpPgfCrFb5HSWvUP6BKLlyR4LjjFEyFCW9uv0VPTLaqMWBE2EXv0R8PaYHmmExH2a1XHfmmUIckSXM1IqV1LmMLJV29uEb+0+kOl4evRWTFCjEx4Ic1pCuKLMaj3cINqtGap6Sd6UfIaLLDSbMc4U+JfwVom9H65tlwLnZTgvgO79EDvuBMQ/meyuZQg4xiwf8Q4lFLSdLQxYk2PeAyQLU/R8S/4C80KpRnFR7Gj6aDARu4KkNaWjIPRctmBK2jU9HvmHviEj0PqRyU62cDi3C5x2ZY/MIDsxun5GRv92/GiV8iaAvLJFrT8jQdXAvbKJKX7OxVBQxCuP//8m51Ow8lKwqOcjcE3odRaBM8NBfN4oO3VyFBO9qUfTk7+z333DJ14KXUFGwDt1SHPwRgHxWNCpe7rb2CxFc=
