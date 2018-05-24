@@ -22,6 +22,13 @@ $ curl -s https://packagecloud.io/install/repositories/cs50/libcs50-java/script.
 $ sudo apt-get install libcs50-java
 ```
 
+### Fedora
+
+```
+$ curl -s https://packagecloud.io/install/repositories/cs50/libcs50-java/script.rpm.sh | sudo bash
+$ sudo yum install libcs50
+```
+
 ### From Source
 
 1. Download the latest release from https://github.com/cs50/libcs50-java/releases
