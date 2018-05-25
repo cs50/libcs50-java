@@ -18,14 +18,14 @@ http://cs50.github.io/libcs50-java/edu/harvard/CS50.html
 ### Ubuntu
 
 ```
-$ curl -s https://packagecloud.io/install/repositories/cs50/libcs50-java/script.deb.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/cs50/repo/script.deb.sh | sudo bash
 $ sudo apt-get install libcs50-java
 ```
 
 ### Fedora
 
 ```
-$ curl -s https://packagecloud.io/install/repositories/cs50/libcs50-java/script.rpm.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/cs50/repo/script.rpm.sh | sudo bash
 $ sudo yum install libcs50-java
 ```
 
