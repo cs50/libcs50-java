@@ -99,9 +99,9 @@ deploy:
   - <<: *x-deb
     dist: ubuntu/focal
 
-  # 20.10
-  - <<: *x-deb
-    dist: ubuntu/groovy
+# # 20.10
+# - <<: *x-deb
+#   dist: ubuntu/groovy
 
   # Fedora
   - <<: *rpm
