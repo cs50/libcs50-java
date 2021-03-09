@@ -4,6 +4,10 @@
 
 http://cs50.github.io/libcs50-java/edu/harvard/CS50.html
 
+## Pacakge Cloud
+
+https://packagecloud.io/MuhammadHassanRazaa/libcs50-java/packages/java/edu.harvard/libcs50-java-1.0.jar
+
 ## Development
 
 ```
