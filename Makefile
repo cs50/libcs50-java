@@ -1,5 +1,5 @@
 DESTDIR ?= /usr/local/share/java
-VERSION = 2.0.4
+VERSION = 3.0.0
 
 all: build docs deb jar
 
