@@ -4,7 +4,7 @@
  *
  * Port of CS50 Library to Java from C.
  *
- * Copyright (c) 2017,
+ * Copyright (c) 2022,
  * David J. Malan <malan@harvard.edu>
  * Kareem Zidane <kzidane@cs50.harvard.edu>
  * All rights reserved.
