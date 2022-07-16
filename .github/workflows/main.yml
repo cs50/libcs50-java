@@ -8,10 +8,12 @@ jobs:
       run: |
         sudo apt-get install -y rpm
         sudo gem install fpm package_cloud
+
     - name: Build
       run: |
         make deb
         make rpm
+
     - name: Deploy
       if: ${{ github.ref == 'refs/heads/main' }}
       run: |
@@ -29,3 +31,39 @@ jobs:
         done
       env:
         PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
+
+    - name: Extract version from Makefile
+      id: make_version
+      run: |
+        echo ::set-output name=version::$(make version)
+
+    - name: Create Tag
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ github.token }}
+        script: |
+          try {
+            await github.rest.git.updateRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "tags/v${{ steps.make_version.outputs.version }}",
+              sha: context.sha,
+              force: true
+            })
+          } catch (e) {
+            await github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/v${{ steps.make_version.outputs.version }}",
+              sha: context.sha
+            })
+          }
+
+    - name: Create Release
+      run: |
+        curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: token ${{ secrets.GH_RELEASE_TOKEN }}" \
+          https://api.github.com/repos/${GITHUB_REPOSITORY}/releases \
+          -d '{"tag_name":"v${{ steps.make_version.outputs.version }}","target_commitish":"${{ github.sha }}","name":"v${{ steps.make_version.outputs.version }}","body":"${{ github.event.head_commit.message }}","draft":false,"prerelease":false,"generate_release_notes":false}'
